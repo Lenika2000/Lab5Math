@@ -20,6 +20,7 @@ public class NewtonPolynomial {
 
     public double getAnswer() throws MethodException {
         if (isEquallySpacedNodes) {
+            System.out.println("Интерполяционная формула Ньютона для равноотстоящих узлов.");
             return equallySpacedNodesMethod();
         } else
             return unequalNodesMethod();
@@ -74,7 +75,7 @@ public class NewtonPolynomial {
         if (x0_index > X.length / 2) {
             System.out.println("Интерполирование назад");
             //TODO интерполирование назад
-            int xn_index= (x0_index==X.length-1)? X.length-1: x0_index+1;
+            int xn_index = (x0_index == X.length - 1) ? X.length - 1 : x0_index + 1;
             getTable(0);
             t = (x - X[xn_index]) / h;
             y = Y[xn_index];
@@ -83,7 +84,7 @@ public class NewtonPolynomial {
             for (int j = 0; j < xn_index; j++) {
                 k = t - j;
                 T = T * k / (j + 1);
-                y += T * deltaY[xn_index-1 - j][j];
+                y += T * deltaY[xn_index - 1 - j][j];
             }
         } else {
             //интерполирование вперед
@@ -99,7 +100,7 @@ public class NewtonPolynomial {
                 y += T * deltaY[0][j];
             }
         }
-        System.out.printf("\nИнтерполяционная формула Ньютона для неравноотстоящих узлов.\nПриближенное значение функции y=f(x) при x=%.4f для заданной таблицы %f", x, y);
+        System.out.printf("Приближенное значение функции y=f(x) при x=%.4f для заданной таблицы %f", x, y);
         return y;
     }
 
@@ -126,7 +127,7 @@ public class NewtonPolynomial {
 
     //все хорошо
     public void getTable(int x0_index) {
-        deltaY = new double[X.length - x0_index+1][X.length - x0_index+1];
+        deltaY = new double[X.length - x0_index + 1][X.length - x0_index + 1];
         int n = X.length - 1; //максимальный индекс строк и столбцов
         //заполняем первую дельту y
         for (int j = x0_index + 1; j < X.length; j++) {
@@ -134,7 +135,7 @@ public class NewtonPolynomial {
         }
         //заполнение таблицы конечных разностей функций
         for (int i = x0_index + 1; i < X.length - 1; i++) { //изменяется столбец
-            for (int j = x0_index; j < n -1; j++) { //изменяется строка
+            for (int j = x0_index; j < n - 1; j++) { //изменяется строка
                 deltaY[j - x0_index][i - x0_index] = deltaY[j - x0_index + 1][i - x0_index - 1] - deltaY[j - x0_index][i - x0_index - 1];
             }
             n--;//с продвижением вправо количество строк в столце уменьшается
@@ -142,7 +143,7 @@ public class NewtonPolynomial {
         //печать таблицы конечных разностей функций
         System.out.println("                   Таблица конечных разностей функции");
         System.out.println("---------------------------------------------------------");
-        n = X.length - x0_index-1;
+        n = X.length - x0_index - 1;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) { //изменяется строка
                 System.out.printf("%8.4f|", deltaY[i][j]);

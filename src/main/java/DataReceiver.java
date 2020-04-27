@@ -4,14 +4,15 @@ import java.io.*;
 public class DataReceiver {
 
     private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
     public double[][] receiveData() {
-         while (true) {
+        while (true) {
             System.out.println("Интерполяция функции");
             System.out.println("Для ввода данных с консоли нажмите 1, для ввода из файла нажмите 2");
             try {
                 switch (in.readLine()) {
                     case "1":
-                        return readFromFile();
+                        return readFromConsole();
                     case "2":
                         return readFromFile();
                     default:
@@ -24,41 +25,6 @@ public class DataReceiver {
         }
 
     }
-
-
-
-
-
-//    public void answer(String s) {
-//        while (true) {
-//            System.out.println("Для вывода ответа в консоль нажмите 1\n"
-//                    + "Для вывода в файл нажмите 2");
-//            try {
-//                switch (in.readLine()) {
-//                    case "1":
-//                        System.out.println(s);
-//                        return;
-//                        case "2":
-//                        writeToFile(s);
-//                        return;
-//
-//                    default:
-//                        System.out.println("Произошла ошибка, повторите ввод еще раз");
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Неверный ввод!");
-//            }
-//        }
-//    }
-
-//    private void writeToFile(String s) {
-//        try (FileWriter writer = new FileWriter("answer.txt", false)) {
-//            writer.write(s);
-//            writer.flush();
-//        } catch (IOException ex) {
-//            System.out.println("Произошла ошибка записи в файл");
-//        }
-//    }
 
     private double[][] readFromConsole() {
         while (true) {

@@ -20,7 +20,7 @@ public class LagrangePolynomial {
             }
             y += l * Y[i];
         }
-        System.out.printf("Многочлен Лагранжа.Приближенное значение функции y=f(x) при x=%.4f для заданной таблицы %f", x, y);
+        System.out.printf("Многочлен Лагранжа.Приближенное значение функции y=f(x) при x=%.4f для заданной таблицы %f\n", x, y);
         return y;
     }
 }
