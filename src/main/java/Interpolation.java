@@ -13,12 +13,8 @@ public class Interpolation {
     public Interpolation() {
         getData();
         getX();
-        X = new double[data[0].length];
-        Y = new double[data[0].length];
-        for (int i = 0; i < data[0].length; i++) {
-            X[i] = data[0][i];
-            Y[i] = data[1][i];
-        }
+        X = data[0];
+        Y=data[1];
     }
 
     public void getData() {
