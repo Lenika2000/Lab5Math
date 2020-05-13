@@ -4,7 +4,7 @@ public class NewtonPolynomial {
     private double x;
     private boolean isEquallySpacedNodes = true; //являются ли узлы равноотсттоящими
     double h;//расстояние между равноотстоящими узлами
-    double[][] deltaY;
+    double[][] deltaY; // таблица конечных разностей функций
 
     public NewtonPolynomial(double[] X, double[] Y, double x) {
         this.X = X;
@@ -70,6 +70,7 @@ public class NewtonPolynomial {
         double y;
         double t;
         if (x0_index > X.length / 2) {
+            //правая половина отрезка
             System.out.println("Интерполирование назад");
             int xn_index = (x0_index == X.length - 1) ? X.length - 1 : x0_index + 1;
             getTable(0, xn_index);
@@ -78,11 +79,12 @@ public class NewtonPolynomial {
             double k = 0;
             double T = 1;
             for (int j = 0; j < xn_index; j++) {
-                k = t - j;
+                k = t + j;
                 T = T * k / (j + 1);
                 y += T * deltaY[xn_index - 1 - j][j];
             }
         } else {
+            //левая половина отрезка
             System.out.println("Интерполирование вперед");
             getTable(x0_index,X.length-1 );
             t = (x - X[x0_index]) / h;
@@ -119,7 +121,7 @@ public class NewtonPolynomial {
         return x0_index;
     }
 
-    //все хорошо
+
     public void getTable(int x0_index, int xn_index) {
         deltaY = new double[X.length -  (x0_index + 1)][X.length - (x0_index + 1)];
         int n = xn_index; //максимальный индекс строк и столбцов
@@ -145,33 +147,5 @@ public class NewtonPolynomial {
             System.out.println("\n---------------------------------------------------------");
         }
     }
-
-//    public void getTable(int x0_index) {
-//        deltaY = new double[X.length -  (x0_index + 1)][X.length - (x0_index + 1)];
-//        int n = X.length - 1; //максимальный индекс строк и столбцов
-//        //заполняем первую дельту y
-//        for (int j = x0_index; j < X.length-1; j++) {
-//            deltaY[j - x0_index][0] = Y[j+1] - Y[j];
-//        }
-//        //заполнение таблицы конечных разностей функций
-//        for (int i = x0_index + 1; i < X.length - 1; i++) { //изменяется столбец
-//            for (int j = x0_index; j < n - 1; j++) { //изменяется строка
-//                deltaY[j - x0_index][i - x0_index] = deltaY[j - x0_index + 1][i - x0_index - 1] - deltaY[j - x0_index][i - x0_index - 1];
-//            }
-//            n--;//с продвижением вправо количество строк в столце уменьшается
-//        }
-//        //печать таблицы конечных разностей функций
-//        System.out.println("                   Таблица конечных разностей функции");
-//        System.out.println("---------------------------------------------------------");
-//        n = X.length - (x0_index + 1);
-//        for (int i = 0; i < n; i++) {
-//            for (int j = 0; j < n; j++) { //изменяется строка
-//                System.out.printf("%8.4f|", deltaY[i][j]);
-//            }
-//            System.out.println("\n---------------------------------------------------------");
-//        }
-//    }
-
-
 
 }

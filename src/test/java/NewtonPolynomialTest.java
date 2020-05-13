@@ -52,7 +52,7 @@ public class NewtonPolynomialTest {
         } catch (MethodException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(expected1,6.737092, 0.01);
+        Assert.assertEquals(expected1,6.737092, 0.0001);
     }
 
 
